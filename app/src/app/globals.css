@@ -1,0 +1,345 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Design Tokens ────────────────────────── */
+:root {
+  --background: #09090b;
+  /* Very dark zinc */
+  --foreground: #fafafa;
+  --primary: #ccff00;
+  /* Neon Yellow-Green from inspiration */
+  --primary-foreground: #020617;
+  --secondary: #27272a;
+  /* Dark gray for secondary elements */
+  --secondary-foreground: #fafafa;
+  --accent: #e4ff70;
+  /* Softer neon for accents */
+  --accent-foreground: #020617;
+  --muted: #18181b;
+  --muted-foreground: #a1a1aa;
+  --border: #27272a;
+  --card: #09090b;
+  --card-foreground: #fafafa;
+  --destructive: #ef4444;
+  --success: #ccff00;
+  --warning: #f59e0b;
+  --radius: 2rem;
+  /* Extreme pill-shaped radius */
+  --gradient-neon: linear-gradient(135deg, #ccff00, #00ff88);
+  --gradient-hero: linear-gradient(180deg, rgba(9, 9, 11, 0) 0%, rgba(9, 9, 11, 1) 100%);
+  --glow-neon: 0 0 30px rgba(204, 255, 0, 0.15);
+}
+
+.light {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --primary: #14f195;
+  --primary-foreground: #022c22;
+  --secondary: #9945ff;
+  --secondary-foreground: #f5f3ff;
+  --accent: #00c2ff;
+  --accent-foreground: #020617;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --border: #e2e8f0;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+}
+
+/* ── Base ─────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-space, 'Space Grotesk'), system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+.font-display {
+  font-family: var(--font-syne, 'Syne'), sans-serif;
+  letter-spacing: -0.02em;
+}
+
+/* ── Scrollbar ────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
+}
+
+/* ── Utilities ────────────────────────────── */
+.gradient-text {
+  background: var(--gradient-neon);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glass {
+  background: rgba(24, 24, 27, 0.4);
+  /* muted */
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(254, 254, 255, 0.05);
+  /* very subtle white border */
+}
+
+.glow-neon {
+  box-shadow: var(--glow-neon);
+}
+
+.text-stroke-primary {
+  -webkit-text-stroke-color: var(--primary);
+}
+
+.text-stroke-2 {
+  -webkit-text-stroke-width: 2px;
+}
+
+.text-transparent {
+  color: transparent;
+}
+
+.noise-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.noise-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: radial-gradient(circle at 50% 100%, rgba(204, 255, 0, 0.05) 0%, rgba(0, 0, 0, 0) 60%);
+  pointer-events: none;
+}
+
+.brutalist-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+.brutalist-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, transparent 50%, var(--primary) 50%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.brutalist-card:hover::after {
+  opacity: 1;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 4s ease-in-out infinite;
+}
+
+@keyframes pulse-slow {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 8s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ── Grid pattern background ──────────────── */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(20, 241, 149, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(20, 241, 149, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ── Card hover effect ────────────────────── */
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary);
+  box-shadow: var(--glow-green);
+}
+
+/* ── Progress bar ─────────────────────────── */
+.progress-bar {
+  height: 4px;
+  background: var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: var(--gradient-solana);
+  border-radius: 999px;
+  transition: width 0.5s ease;
+}
+
+/* ── Wallet Adapter Overrides ─────────────── */
+.wallet-adapter-button {
+  background: var(--primary) !important;
+  color: var(--primary-foreground) !important;
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  border-radius: 0.5rem !important;
+  height: 36px !important;
+  padding: 0 16px !important;
+  transition: all 0.2s !important;
+}
+
+.wallet-adapter-button:hover {
+  filter: brightness(1.1) !important;
+  transform: translateY(-1px) !important;
+}
+
+.wallet-adapter-modal-wrapper {
+  background: var(--card) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+}
+
+/* ── Selection ────────────────────────────── */
+::selection {
+  background: rgba(20, 241, 149, 0.2);
+  color: inherit;
+}
+
+/* ── Focus ring ──────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Smooth scroll ───────────────────────── */
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── Slide up animation ──────────────────── */
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.25s ease-out;
+}
+
+/* ── Prose overrides for lesson content ──── */
+.prose h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.prose h2 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose code {
+  background: var(--muted);
+  padding: 0.15em 0.35em;
+  border-radius: 4px;
+  font-size: 0.85em;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.prose pre {
+  background: var(--muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.prose a {
+  color: var(--primary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.prose a:hover {
+  text-decoration-color: var(--primary);
+}

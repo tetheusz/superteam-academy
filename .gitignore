@@ -59,3 +59,9 @@ onchain-academy/target/verifiable/
 *.log
 *.tmp
 .cache/
+
+# Next.js
+.next/
+out/
+build/
+app/.next/
